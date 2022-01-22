@@ -1,0 +1,22 @@
+{
+  "name": "mchacks2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geener/McHacks2022.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Geener/McHacks2022/issues"
+  },
+  "homepage": "https://github.com/Geener/McHacks2022#readme",
+  "dependencies": {
+    "twilio": "^3.73.0"
+  }
+}
