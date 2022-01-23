@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/Geener/McHacks2022#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.2",
+    "express-session": "^1.17.2",
     "ngrok": "^4.3.0",
+    "oxford-dictionaries-api": "^0.1.2",
     "twilio": "^3.73.0"
   }
 }
