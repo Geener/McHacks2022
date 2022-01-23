@@ -67,7 +67,81 @@ const updateXString = (letter, xString, wordArray) => {
     return newXString;
 }
 
+const getDrawing = (numGuesses) => {
+    let drawing = ""
+
+    if (numGuesses == 0) {
+        drawing = `
+        -
+       +-+
+        |   |
+            |
+            |
+            |
+            |
+      ====`;
+
+    } else if (numGuesses == 1) {
+        drawing = `
+        -
+       +-+
+        |   |
+       O  |
+            |
+            |
+            |
+      ====`
+
+    } else if (numGuesses == 2) {
+        drawing = `
+        -
+       +-+
+        |   |
+       O  |
+       /|   |
+            |
+            |
+      ====`
+
+    } else if (numGuesses == 3) {
+        drawing = `
+        -
+       +-+
+        |   |
+       O  |
+       /|\\  |
+            |
+            |
+      ====`
+
+    } else if (numGuesses == 4) {
+        drawing = `
+        -
+       +-+
+        |   |
+       O  |
+       /|\\  |
+       /    |
+            |
+      ====`
+
+    } else if (numGuesses == 5) {
+        drawing = `
+        -
+       +-+
+        |   |
+       O  |
+       /|\\  |
+       / \\  |
+            |
+      ====`
+    }
+
+    return drawing
+}
+
 let wordArray = []
+let drawing = ""
 let xString = "";
 let guessesLeft = 5;
 let randomWord = "";
@@ -87,7 +161,7 @@ app.post('/sms', (req, res) => {
             console.log(randomWord);
 
             xString = createXString(randomWord.length)
-            outgoingMessage = "Your word is " + xString
+            outgoingMessage = getDrawing(0) + "\n" + xString
             console.log(outgoingMessage);
 
             wordArray = createWordArray(randomWord);
@@ -111,19 +185,22 @@ app.post('/sms', (req, res) => {
 
             if (winCheck(xString)) {
                 outgoingMessage = "Congrats you won! Type PLAY to play again"
-                
+
             } else {
-                outgoingMessage = "Good guess! " + xString
+                outgoingMessage = getDrawing(5 - guessesLeft) + "\n" + xString
             }
 
         } else {
             guessesLeft--;
 
             if (guessesLeft == 0) {
-                outgoingMessage = "Sorry you have no guesses left. Type PLAY to try again"
+                outgoingMessage = getDrawing(5) + "\nType PLAY to try again"
 
             } else {
-                outgoingMessage = "Nope, you have " + guessesLeft + " guesses left"
+                console.log(guessesLeft);
+                drawing = getDrawing(5 - guessesLeft)
+                console.log(drawing);
+                outgoingMessage = drawing + "\n" + xString
             }
         }
     
@@ -152,6 +229,7 @@ app.post('/sms', (req, res) => {
     }, 600)
     
 });
+
 
 http.createServer(app).listen(1337, () => {
     console.log('Express server listening on port 1337');
